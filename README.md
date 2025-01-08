@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/6d587ca9-4f6c-4fff-9fca-a998e93d5bd5)
+
 # Active-Belt-Tensioner
 A dual-channel sim racing belt tensioner using BLDC integrated servo motors.
 
@@ -81,7 +83,10 @@ Where provided, links are to the suppliers used by this author; but not necessar
 | | | | | | **£250** |
 
 \* These prices are approximate/pessimistic at the time of writing. They're intened to give you a rough idea of the cost of the
-project, but may not be accurate at the time of your purchase. 
+project, but may not be accurate at the time of your purchase.
+
+### Protoboard PCB
+TBC
 
 ### Laser-Cut Parts
 Unfortunately unless you happen to have a laser cutter, you will need to outsource the cutting of the [various plates](#) that
