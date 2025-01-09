@@ -1,5 +1,7 @@
 ![image](https://github.com/user-attachments/assets/6d587ca9-4f6c-4fff-9fca-a998e93d5bd5)
 
+[Watch A Video](https://www.youtube.com/watch?v=mdPK2OQolQc)
+
 # Active-Belt-Tensioner
 A dual-channel sim racing belt tensioner using BLDC integrated servo motors.
 
