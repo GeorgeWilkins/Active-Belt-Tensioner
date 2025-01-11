@@ -31,6 +31,8 @@ expenses incurred by those who choose to replicate this project.
 The device described in this documentation is a **prototype** and has in no way been tested for long-term reliability or
 safety.
 
+**The design is _absolutely not safe_ for homes with young children and pets!**
+
 ## Features
 The included [sample JS code](/SimHub/Device.js) offers the following features:
 - **Idle Spring:** While not in a game session, the belts apply a small self-winding torque (as if spring-loaded), meaning
