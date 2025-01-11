@@ -191,6 +191,17 @@ TBC
 ### Configuration
 TBC
 
+#### CANBUS Termination
+TBC
+
+#### Motor Identifiers
+TBC
+
+#### Motor Tuning
+1. Measure the _exact_ unloaded output voltage of your chosen power supply with a multimeter
+2. Set the 'Braking Voltage' in the LKTech configuration tool to be fractionally higher than the measured voltage (+0.1V)
+TBC
+
 ### Usage
 TBC
 
