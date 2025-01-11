@@ -1,4 +1,4 @@
-# Active-Belt-Tensioner
+# Active Belt Tensioner
 A dual-channel sim racing belt tensioner using BLDC integrated servo motors.
 
 Active belt tensioners are a form of haptic feedback device that simulate the forces experienced by a driver within a
@@ -32,7 +32,7 @@ The device described in this documentation is a **prototype** and has in no way 
 safety.
 
 ## Features
-The included [sample code](#) offers the following features:
+The included [sample JS code](/SimHub/Device.js) offers the following features:
 - **Idle Spring:** While not in a game session, the belts apply a small self-winding torque (as if spring-loaded), meaning
   any slack is always automatically wound up into the motor pulleys
 - **Breaking:** Under _deceleration_, the belts will tighten proportionally, simulating your body being pushed against
@@ -46,7 +46,7 @@ The included [sample code](#) offers the following features:
 You can modify the behaviour of this device in a few ways:
 - **Device Settings (SimHub):** The _Custom Serial Device_ UI in SimHub offers a number of sliders that allow you to
   easily adjust the strength of pre-defined effects without needing to touch the code
-- **JavaScript Code (SimHub):** All of the telemetry-based effects are written in JavaScript and can be edited within
+- **JS Code (SimHub):** All of the telemetry-based effects are written in JavaScript and can be edited within
   SimHub, allowing relatively easy customisation of the effects to any degree you desire; simply by sending torque values
   (`-1.0`-`1.0`) to the controller for the left and right belts (in addition to an idle spring torque)
 - **Teensy C++ Code:** The low-level motor control code is written in C++ and located on the microcontroller. It should
