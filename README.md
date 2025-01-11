@@ -9,8 +9,8 @@
 A dual-channel sim racing belt tensioner using BLDC integrated servo motors.
 
 Active belt tensioners are a form of haptic feedback device that simulate the forces experienced by a driver within a
-moving vehicle. They do this by tightening and loosening a 5-point racing harness attached to the seat, based on in-game
-telemetry (`surge`, `sway` and `heave`).
+moving vehicle. They achieve this by tightening and loosening the shoulder belts of a 5-point racing harness attached to
+the seat, based on in-game telemetry (`surge`, `sway` and `heave`).
 
 The application these forces contributes towards tricking the brain into thinking it is moving; tyipcally in conjunction
 with other haptic feedback devices (tactile transducers, active seat bolsters, etc).
@@ -28,9 +28,9 @@ The device described in this documentation is a **prototype** and has in no way 
 safety.
 
 ## Features
-Although the codebase for this device is designed to be easy to enhance, the included [sample code](#) offers the following:
-- **Idle Spring:** While not in a game session, the belts apply a small self-winding torque (as if spring-loaded), meaning any
-  slack is always automatically wound up into the motor pulleys
+The included [sample code](#) offers the following features:
+- **Idle Spring:** While not in a game session, the belts apply a small self-winding torque (as if spring-loaded), meaning
+  any slack is always automatically wound up into the motor pulleys
 - **Breaking:** Under _deceleration_, the belts will tighten proportionally, simulating your body being pushed against
   the belts as it wants to continue moving forward at the same velocity
 - **Acceleration:** Under _acceleration_, the belts will loosen proportionally, simulating your body being pulled back
@@ -39,12 +39,13 @@ Although the codebase for this device is designed to be easy to enhance, the inc
   body being pushed against either side of the vehicle
 
 ### Further Customisation
-You can modify the behaviour of this device in two ways:
-- **SimHub Settings:** The _Custom Serial Device_ UI in SimHub offers a number of sliders that allow you to easily adjust
-  the strength of pre-defined effects without needing to touch the code
-- **SimHub JavaScript Code:** All of the telemetry-based effects are written in JavaScript and can be edited within
+You can modify the behaviour of this device in a few ways:
+- **Device Settings (SimHub):** The _Custom Serial Device_ UI in SimHub offers a number of sliders that allow you to
+  easily adjust the strength of pre-defined effects without needing to touch the code
+- **JavaScript Code (SimHub):** All of the telemetry-based effects are written in JavaScript and can be edited within
   SimHub, allowing relatively easy customisation of the effects to any degree you desire; simply by sending torque values
-  (`-1.0`-`1.0`) to the controller for the left and right belts (in addition to an idle spring torque). The low-level
+  (`-1.0`-`1.0`) to the controller for the left and right belts (in addition to an idle spring torque)
+- **Arduino C++ Code:** The low-level
   motor control code is written in C++ and located on the microcontroller. It should not need to be amended in most cases
 
 ## Reccomendation
@@ -91,7 +92,22 @@ Where provided, links are to the suppliers used by this author; but not necessar
 project, but may not be accurate at the time of your purchase.
 
 ### Protoboard PCB
-TBC
+
+
+The current board I'm running was made specifically for experimentation and been modified a number of times to solve issues, so it includes extraneous components.
+
+The design included in this repository is a simplified version of the same board that includes only the necessary components and traces.
+
+> **Note:** I am currently designing a simple custom PCB that will make this much neater and replace the acrylic tray the protoboard sits ine (by integrating the mounting lugs).
+
+#### Power Supply & Diodes
+I've used a dual-PSU design in an effort to reduce issues with back-emf triggering the power supply overvoltage protection. This issue appears to have since been resolved through the addition of braking resistors.
+
+You could probably get away with a single-PSU and eliminate the second power input connectors.
+
+I'm also not sure if the diodes are actually necessary. I added them while debugging some CANBUS issues, but haven't made a new board without them yet. I'll update this documentation after some experimentation.
+
+
 
 ### Laser-Cut Parts
 Unfortunately unless you happen to have a laser cutter, you will need to outsource the cutting of the [various plates](#) that
