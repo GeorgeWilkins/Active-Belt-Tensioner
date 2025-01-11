@@ -113,46 +113,53 @@ The vast majority of the cost is the motors.
 | | | | | | **~£380** |
 
 ### Laser-Cut Parts
-The structure of the tensioner is comprised of stacked [3mm black cast acrylic sheet](https://kitronik.co.uk/products/value-acrylic-sheet-cast-3mm-x-400mm-x-300mm?variant=39715481124927), because I always have a huge stock of the stuff and it cuts beautifully on my diode laser.
+The structure of the tensioner is comprised of stacked [3mm black cast acrylic sheet](https://kitronik.co.uk/products/value-acrylic-sheet-cast-3mm-x-400mm-x-300mm?variant=39715481124927), because I always have a huge stock of the stuff and it cuts beautifully on my diode laser. It is more than strong enough for the task.
 
 Unless you happen to have a laser cutter, you will need to outsource the cutting of these layered sheets, or come up with your own version of the design.
 
-I've obtained a quotation from [RazorLab](https://razorlab.online/) of approximately £125 for the parts to be cut, which is quite a lot. I estimate cutting it on my own machine cost around £10, ecluding my time and diode wear. Make of that what you will.
+I've obtained a quotation from [RazorLab](https://razorlab.online/) of approximately £125 for the parts to be cut, which is quite a lot. I estimate cutting it on my own machine cost around £15, excluding my time. Make of that what you will.
 
 If using acrylic, these plates can be glued together using a dedicated acrylic bonding agent, or simple Cyanoacrylate (super glue). You could also cut them out of plywood or engineering plastics (where safe to do so).
 
 ![Construction](https://github.com/user-attachments/assets/912797b4-8dd1-4cdb-b3e0-1440d6d163f4)
 
 ### Protoboard PCB
+The current prototype uses a standard 40x60mm protoboard and can be assemabled by anyone familiar with a soldering iron. The designs below are a simplified version, as the one I've created has unnecessary components and traces for development and testing purposes.
+
+This design still leaves room for the remaining pins on the Teensy to be utilised where desired, such as adding I2C/SPI/Serial displays, sensors and input devices.
+
+I am currently designing a custom PCB that will make this much neater and remove the need for the acrylic mounting tray (by integrating the mounting lugs into the PCB itself). Once this has been manufactured and tested, I'll make the design available here.
+
+#### Board Layout
 ![Protoboard](https://github.com/user-attachments/assets/559f9396-00fb-4162-9be7-d4e1d673a4f3)
+
+#### ...With Labels
 ![Protoboard (Labelled)](https://github.com/user-attachments/assets/a9f5eaf1-314e-4c38-9d52-74c1a6559baf)
+
+#### ...Only Traces
 ![Protoboard (Traces)](https://github.com/user-attachments/assets/fd9bbda2-4b83-4505-9658-52a0d47150eb)
 
-The actual board I'm running was made specifically for experimentation and been modified a number of times to solve issues, so it includes unnecessary components.
-
-The design shown above is a simplified version that includes only the necessary components and traces.
-
-I am currently designing a custom PCB that will make this much neater and remove the need for the acrylic mounting tray (by integrating the mounting lugs into the PCB itself). Once this has been manufactured and tested, I'll make the design available.
+The '0' labelled resistors can be zero-ohm links or bridging wire. Generally I'd reccommend bending solid single-core wire to match the trace paths and soldering that down on the board, rather than trying to solder-bridge everything.
 
 #### Power Supply, Connectors & Diodes
 I've used a dual-PSU design in an effort to reduce issues with back-EMF triggering the power supply overvoltage protection. These concerns appear to have been mitigated through the addition of motor braking resistors; though I haven't re-tested with a single supply since adding them.
 
-You could probably get away with a single-PSU and eliminate the second power input connectors.
+You could probably get away with a single-PSU and eliminate the second power input connectors, diode and traces.
 
 While the protoboard design shows spade terminals, I'm not sure I'd recommended them. Better alternatives exist, such as screw terminal blocks; and there is space for other types. Which you choose will likely depend on your power supply choice.
 
 I'm also not sure if the protection diodes are actually necessary. I added them while debugging some CANBUS issues, but haven't made a new board without them yet. I'll update this documentation after some experimentation.
 
 ### Tools & Consumables
-- **Soldering Iron & Solder:** For attaching wires to the protoboard and motor controller
-- **Heat-Shrink Tubing:** Suggested for covering the braking resistor legs
+- **Soldering Iron & Solder:** For creating the protoboard and connecting the braking resistors to the motor drivers
+- **Heat-Shrink Tubing:** For covering the braking resistor legs
 - **M4 Thread Tap:** For tapping the holes in the braking resistors and belt loops
 - **Countersink Bit:** For countersinking the holes for mounting the braking resistors to the cooling plates (optional)
 - **Multimeter:** For checking continuity and precise voltages
 - **Wire Strippers / Pilers:** For trimming and removing insulation from wires
 - **Allen Key Set:** For attaching the motors to the cooling plates
 - **Hacksaw / Jigsaw / Bandsaw:** For trimming the aluminium bars
-- **JST Crimping Tool:** For attaching the JST connectors to the motor leads
+- **JST Crimping Tool:** For attaching the JST connectors to the unterminated motor leads
 
 ## Source Files
 - [Arduino / Teensy Code](/Teensy)
@@ -160,8 +167,20 @@ I'm also not sure if the protection diodes are actually necessary. I added them 
 - [SimHub Importable Device](/SimHub/Device.shsds)
 - [Parts SVGs (Laser-Cut Acrylic)](/Parts)
 
-## Assmebly
+## Assemebly
 TBC
+
+### Protoboard
+TBC
+
+### Main Unit
+TBC
+
+### Belt Loops
+1. Pre-tap the holes with M4 threads (you won't be able to do this once the plates are glued
+2. Glue the plates together
+3. Fit the M4 grub screws
+4. Feed the steel wire into the hole aand tighten the grub screws
 
 ## Setup & Usage
 TBC
