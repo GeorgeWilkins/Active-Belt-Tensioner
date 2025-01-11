@@ -124,11 +124,11 @@ If using acrylic, these plates can be glued together using a dedicated acrylic b
 ![Construction](https://github.com/user-attachments/assets/912797b4-8dd1-4cdb-b3e0-1440d6d163f4)
 
 ### Protoboard PCB
-The current prototype uses a standard 40x60mm protoboard and can be assemabled by anyone familiar with a soldering iron. The designs below are a simplified version, as the one I've created has unnecessary components and traces for development and testing purposes.
+The current prototype uses a standard 40x60mm protoboard and can be assembled by anyone familiar with a soldering iron. The designs below are a simplified version; the one I'm running has unnecessary components and traces for development and testing purposes.
 
 This design still leaves room for the remaining pins on the Teensy to be utilised where desired, such as adding I2C/SPI/Serial displays, sensors and input devices.
 
-I am currently designing a custom PCB that will make this much neater and remove the need for the acrylic mounting tray (by integrating the mounting lugs into the PCB itself). Once this has been manufactured and tested, I'll make the design available here.
+I am planning to design a custom PCB that will make this much neater and remove the need for the acrylic mounting tray (by integrating the mounting lugs into the PCB itself). Once this has been manufactured and tested, I'll make the design available here. I've used [Aisler](https://aisler.net/) before for other projects and intend to use them again.
 
 #### Board Layout
 ![Protoboard](https://github.com/user-attachments/assets/559f9396-00fb-4162-9be7-d4e1d673a4f3)
@@ -173,14 +173,28 @@ TBC
 ### Protoboard
 TBC
 
+### Motors
+1. Terminate the bare negative and positive (black and red) wires of the motors with the 2x3 header connectors
+2. Terminate the bare CANBUS (yellow and blue) wires of the motors to the 2x1 header connectors
+3. Set the {MOTOR ID} + {CANBUS TERMINATION RESISTOR}
+
 ### Main Unit
-TBC
+1. Glue the 'Front Panel' plates together
+2. Glue the 'Rear Panel' plates together
+3. Glue the 'Pulley' plates together (remembering to keep each pulley in two parts so the 'S' plate that retains the steel wire is accessible)
+4. Bolt the 'Pulley' parts and wires onto the motors (ensuring that one side if 'flipped' so the wire winds from the outside edge on both sides)
+5. Attach the motors (and attached pulleys) to the assembled 'Rear Panel' part using the 12mm M4 bolts
+6. Using the 40mm spacers and 12mm M4 bolts, attach the 'Front Panel' to the 'Rear Panel' (ensuring the previously attached wires exit between the appropriate spacers)
+7. {ATTACH COOLING PLATES}
+8. {ATTACH GRUBS + SPACERS}
+9. {ATTACH PROTOBOARD TRAY}
+10. {ATTACH PROTOBOARD}
 
 ### Belt Loops
-1. Pre-tap the holes with M4 threads (you won't be able to do this once the plates are glued
-2. Glue the plates together
+1. Pre-tap the 'Belt Loop' plate holes with M4 threads (you won't be able to do this once the plates are glued)
+2. Glue the 'Belt Loop' plates together
 3. Fit the M4 grub screws
-4. Feed the steel wire into the hole aand tighten the grub screws
+4. Feed the steel wire into the hole and tighten the grub screws to retain the wire (use a looser fit when first testing your setup)
 
 ## Setup & Usage
 TBC
