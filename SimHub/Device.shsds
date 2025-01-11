@@ -1,0 +1,70 @@
+{
+  "AutomaticReconnect": false,
+  "SerialPortName": "COM3",
+  "StartupDelayMs": 0,
+  "IsConnecting": false,
+  "IsEnabled": true,
+  "LogIncomingData": false,
+  "IsConnected": true,
+  "BaudRate": 57600,
+  "DtrEnable": true,
+  "RtsEnable": true,
+  "EditorExpanded": true,
+  "Name": "Custom Serial device",
+  "Description": "Belt Tesnioner",
+  "LastErrorDate": "0001-01-01T00:00:00",
+  "LastErrorMessage": null,
+  "IsFreezed": false,
+  "SettingsBuilder": {
+    "Settings": [
+      {
+        "Maximum": 1000,
+        "Minimum": 0,
+        "PropertyName": "torqueAtRest",
+        "CurrentValue": 90,
+        "Name": null,
+        "TypeName": "SliderEntry",
+        "Label": "Force When Stationary",
+        "Id": "f2e91b4c-658f-4f86-a5c5-075356fb6470"
+      },
+      {
+        "Maximum": 1000,
+        "Minimum": 0,
+        "PropertyName": "torqueAtMaximumAcceleration",
+        "CurrentValue": 10,
+        "Name": null,
+        "TypeName": "SliderEntry",
+        "Label": "Force Under Maximum Acceleration (Minimum Tension)",
+        "Id": "c1a27a9a-27dd-4685-a693-bf48d8322b31"
+      },
+      {
+        "Maximum": 1000,
+        "Minimum": 0,
+        "PropertyName": "torqueAtMaximumDeceleration",
+        "CurrentValue": 1000,
+        "Name": null,
+        "TypeName": "SliderEntry",
+        "Label": "ForceUnder Maximum Deceleration (Maximum Tension)",
+        "Id": "621cd4f1-1a3d-4a53-8b70-16a34fc46b72"
+      }
+    ],
+    "IsEditMode": false
+  },
+  "OnConnectMessage": {
+    "Expression": ""
+  },
+  "OnDisconnectMessage": {
+    "Expression": ""
+  },
+  "UpdateMessages": [
+    {
+      "Message": {
+        "JSExt": 0,
+        "Interpreter": 1,
+        "Expression": "//$prop('AccelerationSurge')\r\n//$prop('AccelerationSway'): treat -6 to 6 as dead zone, ~20 is hard corner, negative is turning right\r\n//$prop('AccelerationHeave')\r\n\r\n// Read Settings\r\nlet torqueAtRest = $prop('Settings.torqueAtRest') * 0.001;\r\nlet torqueAtMaximumAcceleration = $prop('Settings.torqueAtMaximumAcceleration') * 0.001;\r\nlet torqueAtMaximumDeceleration = $prop('Settings.torqueAtMaximumDeceleration') * 0.001;\r\n\r\nconst surgeMaximum = 25;\r\nconst surgeMinimum = 15;\r\nconst swayMaximum = 25;\r\n\r\n// Calculate Surge\r\nlet surgeRaw = Math.max(surgeMinimum * -1, Math.min(surgeMaximum, $prop('AccelerationSurge')));\r\nlet surgePercent = (surgeRaw >= 0)\r\n    ? (surgeRaw / surgeMaximum)\r\n    : (surgeRaw / surgeMinimum);\r\nlet surgeTorque = torqueAtRest + ((surgePercent >= 0)\r\n\t? (surgePercent * (torqueAtMaximumDeceleration - torqueAtRest))\r\n    : (Math.abs(surgePercent) * (torqueAtMaximumAcceleration - torqueAtRest))\r\n);\r\n\r\n// Calculate Sway\r\nlet swayRaw = Math.max(swayMaximum * -1, Math.min(swayMaximum, $prop('AccelerationSway')));\r\nlet swayPercent = (swayRaw / swayMaximum);\r\n\r\n\r\n\r\n\r\nlet leftTorque = Math.min(1, surgeTorque + Math.max(swayPercent, 0));\r\nlet rightTorque = Math.min(1, surgeTorque - Math.min(swayPercent, 0));\r\n\r\n// Return Telemetry\r\nreturn '|' + [\r\n\tMath.round(leftTorque * 1000),\r\n    Math.round(rightTorque * 1000),\r\n    Math.round(torqueAtRest * 1000),\r\n].join(',');"
+      },
+      "IsEnabled": true,
+      "MaximumFrequency": 60
+    }
+  ]
+}
