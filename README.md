@@ -92,13 +92,15 @@ Where provided, links are to the suppliers used by this author; but not necessar
 project, but may not be accurate at the time of your purchase.
 
 ### Protoboard PCB
+![Protoboard](https://github.com/user-attachments/assets/559f9396-00fb-4162-9be7-d4e1d673a4f3)
+![Protoboard (Labelled)](https://github.com/user-attachments/assets/a9f5eaf1-314e-4c38-9d52-74c1a6559baf)
+![Protoboard (Traces)](https://github.com/user-attachments/assets/fd9bbda2-4b83-4505-9658-52a0d47150eb)
 
+The actual board I'm running was made specifically for experimentation and been modified a number of times to solve issues, so it includes unnecessary components.
 
-The current board I'm running was made specifically for experimentation and been modified a number of times to solve issues, so it includes extraneous components.
+The design shown above is a simplified version that includes only the necessary components and traces.
 
-The design included in this repository is a simplified version of the same board that includes only the necessary components and traces.
-
-> **Note:** I am currently designing a simple custom PCB that will make this much neater and replace the acrylic tray the protoboard sits ine (by integrating the mounting lugs).
+I am currently designing a custom PCB that will make this much neater and remove the need for the acrylic mounting tray (by integrating the mounting lugs into the PCB itself). Once this has been manufactured and tested, I'll make the design available.
 
 #### Power Supply & Diodes
 I've used a dual-PSU design in an effort to reduce issues with back-emf triggering the power supply overvoltage protection. This issue appears to have since been resolved through the addition of braking resistors.
