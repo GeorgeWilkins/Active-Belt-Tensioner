@@ -72,9 +72,6 @@ tensioner absolutely adds to the experience, but should not be your top priority
   data to the controller at the desired frequency
 
 ## Parts, Materials & Pricing
-The total BOM cost for this project is approximately **£350** at the time of writing, including the laser-cut acrylic
-parts. This does not include the cost of the seat, harness or other prerequisite equipment.
-
 Where provided, links are simply for reference and not recommendations. Many of the parts are not available individually,
 so must be bought in bulk. The total given should be enough to cover the required quantity; likely with plenty of spares.
 
@@ -94,12 +91,12 @@ components.
 | Silicone Wire | ~1 metre | [22AWG Silicone Wire](https://www.amazon.co.uk/gp/product/B0CG2SCCPB) | Connects the braking resistors to the motor pads | Silicone sleeving preferred for heat resistance | £10 |
 | Aluminium Spacer | 11 | [40mm ⌀7mm M4 Aluminium Spacers](https://www.aliexpress.com/item/1005002348335932.html) | Round threaded spacers to attach the front and rear acylic plates together, creating a cage around the motors and pulleys | | £8 |
 | Aluminium Spacer | 4 | [12mm ⌀7mm M4 Aluminium Spacers](https://www.aliexpress.com/item/1005002348335932.html) | Round threaded spacers to attach the protoboard tray to the cooling plates | | £4 |
-| Grub | 4 | M4x20mm Grub Screw | Attach the motors and the protoboard tray to the cooling plates | | £0 |
-| Grub | 6 | M4x5mm Grub Screw | Secures the steel wire into the belt loops | I've used sprung-bearing pointed grubs, but any type will do | £0 |
-| Bolt | 4 | M4x16mm Hex-Head Bolt | Attach the cooling plates to motors | | £0 |
-| Bolt | 30 | M4x12mm Hex-Head Bolt | Attach the acrylic plates to the aulminium spacers and motors to the acrylic plates | | £0 |
-| Bolt | 8 | M5x16mm Hex-Head Bolt | Attach the wire pulleys to the motors | | £0 |
-| Bolt | 4 | M4x5~10mm Hex-Head + Countersunk Bolt | Attaches the braking resistors to the cooling plates | Could use thermal adhesive instead; depends on the resistors you get | £5 |
+| Grub | 4 | M4x20mm Grub Screw | Attach the motors and the protoboard tray to the cooling plates | | £3 |
+| Grub | 6 | M4x5mm Grub Screw | Secures the steel wire into the belt loops | I've used sprung-bearing pointed grubs, but any type will do | £3 |
+| Bolt | 4 | M4x16mm Hex-Head Bolt | Attach the cooling plates to motors | | £3 |
+| Bolt | 30 | M4x12mm Hex-Head Bolt | Attach the acrylic plates to the aulminium spacers and motors to the acrylic plates | | £5 |
+| Bolt | 8 | M5x16mm Hex-Head Bolt | Attach the wire pulleys to the motors | | £5 |
+| Bolt | 4 | M4x5~10mm Hex-Head + Countersunk Bolt | Attaches the braking resistors to the cooling plates | Could use thermal adhesive instead; depends on the resistors you get | £3 |
 | Protoboard | 1 | [40x60mm 2.54mm Pitch Protoboard](https://www.amazon.co.uk/Prototype-Universal-Connectors-Terminals-Electronic/dp/B09N28GWSV) | A prototyping PCB to mount the electronics to | | £1 |
 | Aluminium Bar | 2 | [0.5x1x6.5" Aluminium Bar](https://www.amazon.co.uk/sourcing-map-Square-Aluminum-Thickness/dp/B0CKPMNJCL) | Cooling plates to attach the motors, braking resistors and protoboard tray together | | £10 |
 | Connector | 2 | [2x3 2.54mm Pitch Header Connector](https://www.amazon.co.uk/gp/product/B07MNKWXSB) | For terminating the motor power wires | | - |
@@ -108,6 +105,17 @@ components.
 | Connector | 1 | [1x6 2.54mm Header Socket](https://www.ebay.co.uk/itm/232533145324?var=533695806584) | For the CANBUS transceiver socket on the protoboard | You can also take longer ones and cut them down | - |
 | Connector | - | [2.54mm Header Pins](https://www.amazon.co.uk/gp/product/B0CSJQJFPK) | For the protoboard connections | I prefer the colour-coded ones, but standard black ones will do | - |
 | | | | | | **£250** |
+
+### Laser-Cut Parts
+The structure of the tensioner is stacked [3mm black cast acrylic sheet](https://kitronik.co.uk/products/value-acrylic-sheet-cast-3mm-x-400mm-x-300mm?variant=39715481124927), because I always have a huge stock of the stuff and it cuts beautifully on my diode laser.
+
+Unless you happen to have a laser cutter, you will need to outsource the cutting of these layered sheets, or come up with your own version of the design.
+
+If using acrylic, these plates can be glued together using a dedicated acrylic bonding agent, or simple Cyanoacrylate (super glue). You could also cut them out of plywood or engineering plastics (where safe to do so).
+
+![Construction](https://github.com/user-attachments/assets/912797b4-8dd1-4cdb-b3e0-1440d6d163f4)
+
+
 
 ### Tools & Consumables
 - **Soldering Iron & Solder:** For attaching wires to the protoboard and motor controller
@@ -138,11 +146,7 @@ While the protoboard design shows spade terminals, I'm not sure I'd recommended 
 
 I'm also not sure if the protection diodes are actually necessary. I added them while debugging some CANBUS issues, but haven't made a new board without them yet. I'll update this documentation after some experimentation.
 
-### Laser-Cut Parts
-Unfortunately unless you happen to have a laser cutter, you will need to outsource the cutting of the [various plates](#) that
-make up the chassis of the tensioner. While this is difficult to estimate, these should around £50-£100 in total.
 
-These plates can be glued together using a dedicated acrylic bonding agent, or simple Cyanoacrylate (super glue).
 
 ## Source Files
 TBC
