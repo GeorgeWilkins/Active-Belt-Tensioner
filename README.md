@@ -54,7 +54,7 @@ You can modify the behaviour of this device in a few ways:
 - **Teensy C++ Code:** The low-level motor control code is written in C++ and located on the microcontroller. It should
   not need to be amended in most cases, but can be edited and re-flashed to the Teensy using the Arduino IDE if desired
 
-## Reccomendation
+## Recommendation
 This device is intended to be attached to a dedicated sim racing rig; a tubular steel or aluminium profile frame with a
 racing-style seat (with appropriate belt holes and fixing points).
 
@@ -78,7 +78,7 @@ Where provided, links are simply for reference and not recommendations. Many of 
 so must be bought in bulk. The total given should be enough to cover the required quantity; likely with plenty of spares.
 
 If you're prepared to change the design yourself to fit what you already have, you can probably eliminate a few of these
-components.
+components. Given enough interest, I may create a cost-optimised version of the design.
 
 ![Assembled Prototype](https://github.com/user-attachments/assets/20adceba-4a37-4b92-ac0b-1307ab532011)
 
@@ -106,7 +106,8 @@ components.
 | Connector | 2 | [1x14 2.54mm Header Socket](https://www.ebay.co.uk/itm/232533145324?var=533695806584) | For the Teensy socket on the protoboard | You can also take longer ones and cut them down | £3 |
 | Connector | 1 | [1x6 2.54mm Header Socket](https://www.ebay.co.uk/itm/232533145324?var=533695806584) | For the CANBUS transceiver socket on the protoboard | You can also take longer ones and cut them down | £3 |
 | Connector | - | [2.54mm Header Pins](https://www.amazon.co.uk/gp/product/B0CSJQJFPK) | For the protoboard connections | I prefer the colour-coded ones, but standard black ones will do | £3 |
-| | | | | | **~£320** |
+| Clamp | 2 | [2" Truss Clamps](https://www.amazon.co.uk/sourcing-map-Aluminum-Lighting-1-89-2-01inch/dp/B0DGLFSM6K) | For mounting the tensioner to a 2" tubular rig frame | For other types of rig frame, you'll need to come up with a different mount | £20 |
+| | | | | | **~£340** |
 
 ### Laser-Cut Parts
 The structure of the tensioner is stacked [3mm black cast acrylic sheet](https://kitronik.co.uk/products/value-acrylic-sheet-cast-3mm-x-400mm-x-300mm?variant=39715481124927), because I always have a huge stock of the stuff and it cuts beautifully on my diode laser.
@@ -147,10 +148,11 @@ While the protoboard design shows spade terminals, I'm not sure I'd recommended 
 
 I'm also not sure if the protection diodes are actually necessary. I added them while debugging some CANBUS issues, but haven't made a new board without them yet. I'll update this documentation after some experimentation.
 
-
-
 ## Source Files
-TBC
+- [Arduino / Teensy Code](/Teensy)
+- [SimHub JS Code](/SimHub/Device.js)
+- [SimHub Importable Device](/SimHub/Device.shsds)
+- [Parts SVGs (Laser-Cut Acrylic)](/Parts)
 
 ## Assmebly
 TBC
@@ -183,6 +185,10 @@ TBC
   - This includes being permitted to make kits available (e.g. the laser cut parts, fittings, etc)
 - **Will you supply me with the laser-cut parts?**
   - No. I'm not equipped to run a laser cutting service
+- **How do I mount this to my aluminium profile rig?**
+  - This has been designed to clamp onto 2" tubing rigs using a pair of truss clamps, not aluminium profile
+  - If you want to do this, you'll need to come up with your own mounting solution
+  - If there is enough intereest I'll have a look at making the design support universal fitting 
 - **Where are the files for the belt rollers?**
   - I considered adding them, but since they're so specific to my rig and chosen seat, they are almost certainly going to be useless to you
   - Whether these are actually needed or not will depend on your seat's design. You may be better off just sticking some nylon/acetal rods in the belt holes for the belts to run over
@@ -193,3 +199,7 @@ TBC
   - Not as far as I've observed; the motors and their controllers barely get warm
   - The load we're putting these motors under is actually pretty light and not continuous-duty
   - If you don't tune the braking resistor voltage properly, then you _will_ have overheating (and other) problems
+- **How much noise does it make?**
+  - That will actually depend on how well you tune the FOC parameters in the motor configuration software
+  - I have a number of these motors now in different sizes/windings and some are virtually silent, while others are whiney (indicating the tuning needs improvement)
+  - The motors come with a crude 'factory tune' that can be improved, but that is beyond the scope of this documentation
