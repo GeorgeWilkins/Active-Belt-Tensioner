@@ -115,7 +115,7 @@ The vast majority of the cost is the motors.
 ### Laser-Cut Parts
 The structure of the tensioner is comprised of stacked [3mm black cast acrylic sheet](https://kitronik.co.uk/products/value-acrylic-sheet-cast-3mm-x-400mm-x-300mm?variant=39715481124927), because I always have a huge stock of the stuff and it cuts beautifully on my diode laser. It is more than strong enough for the task.
 
-Unless you happen to have a laser cutter, you will need to outsource the cutting of these layered sheets, or come up with your own version of the design.
+Unless you happen to have a laser cutter, you will need to outsource the cutting of these layered sheets, or come up with your own version of the design. The required files have been provided in both [SVG]() and [DXF]() formats, as these tend to be the supported formats for online quotation systems.
 
 I've obtained a quotation from [RazorLab](https://razorlab.online/) of approximately £125 for the parts to be cut, which is quite a lot. I estimate cutting it on my own machine cost around £15, excluding my time. Make of that what you will.
 
@@ -131,15 +131,13 @@ This design still leaves room for the remaining pins on the Teensy to be utilise
 I am planning to design a custom PCB that will make this much neater and remove the need for the acrylic mounting tray (by integrating the mounting lugs into the PCB itself). Once this has been manufactured and tested, I'll make the design available here. I've used [Aisler](https://aisler.net/) before for other projects and intend to use them again.
 
 #### Board Layout
-![Protoboard](https://github.com/user-attachments/assets/559f9396-00fb-4162-9be7-d4e1d673a4f3)
+![Protoboard](https://github.com/user-attachments/assets/f8910af4-9150-47cc-9a3b-50a3e95b057e)
 
-#### ...With Labels
-![Protoboard (Labelled)](https://github.com/user-attachments/assets/a9f5eaf1-314e-4c38-9d52-74c1a6559baf)
+#### ...Unpopulated
+![Protoboard (Unpopulated)](https://github.com/user-attachments/assets/c33e2eca-f029-4987-a51a-924a5413cab1)
 
-#### ...Only Traces
-![Protoboard (Traces)](https://github.com/user-attachments/assets/fd9bbda2-4b83-4505-9658-52a0d47150eb)
-
-The '0' labelled resistors can be zero-ohm links or bridging wire. Generally I'd reccommend bending solid single-core wire to match the trace paths and soldering that down on the board, rather than trying to solder-bridge everything.
+#### ...Traces
+![Protoboard (Traces)](https://github.com/user-attachments/assets/73255be8-d9b6-42a1-8278-645d099a3edd)
 
 #### Power Supply, Connectors & Diodes
 I've used a dual-PSU design in an effort to reduce issues with back-EMF triggering the power supply overvoltage protection. These concerns appear to have been mitigated through the addition of motor braking resistors; though I haven't re-tested with a single supply since adding them.
@@ -167,11 +165,18 @@ I'm also not sure if the protection diodes are actually necessary. I added them 
 - [SimHub Importable Device](/SimHub/Device.shsds)
 - [Parts SVGs (Laser-Cut Acrylic)](/Parts)
 
-## Assemebly
-TBC
+## Assembly
+Between the previously shown protoboard diagrams and the exploded view of the acrylic plates, the process of physically putting together the tensioner unit should be fairly obvious. Notes on which fasteners are used where are included in the [list of parts](#parts-materials--pricing) above.
+
+Any notable details are included below.
 
 ### Protoboard
-TBC
+1. Attach the various headers to the board
+2. Attach the spade terminals and diodes (where using these)
+3. Attach the zero-ohm links (or equivalent insulated wire)
+4. Referencing the [traces diagram](#traces), cut and bend solid-core wire to match and solder to the board
+5. Check continuity with a multimeter (good connections, no shorts, etc)
+6. Attach the pins to the Teensy and Transceiver, where not already done
 
 ### Motors
 1. Terminate the bare negative and positive (black and red) wires of the motors with the 2x3 header connectors
@@ -218,6 +223,8 @@ A CANBUS consists of two wires (`High` & `Low`) with any number of devices conne
 Our _Transciever_ board has one of these built in, so we just need to add another at the other end, which will be one of our motors. Thankfully these motors have these built-in, and we just need to use the DIP switches on the back to set this to _enabled_ for the terminating motor and _disabled_ for the non-terminating one.
 
 In the configuration I've used, the _TBC_ motor is at the end of the BUS, so that's the one we want it enabled on (see the motor manual for details).
+
+Alternatively you could solder your own 120Ohm resistor across the top of the blue CANBUS headers on the protoboard.
 
 #### Resistor Tuning
 1. Measure the _exact_ unloaded output voltage of your chosen power supply with a multimeter (for a '24V' supply this might actually be something like 24.15V)
