@@ -108,6 +108,7 @@ The vast majority of the cost is the motors.
 | Connector | 2 | [1x14 2.54mm Pitch Header Socket](https://www.ebay.co.uk/itm/232533145324?var=533695806584) | For the Teensy socket on the protoboard | You can also take longer ones and cut them down | £3 |
 | Connector | 1 | [1x6 2.54mm Pitch Header Socket](https://www.ebay.co.uk/itm/232533145324?var=533695806584) | For the CANBUS transceiver socket on the protoboard | You can also take longer ones and cut them down | £3 |
 | Connector | - | [2.54mm Pitch Header Pins](https://www.amazon.co.uk/gp/product/B0CSJQJFPK) | For the protoboard connections | I prefer the colour-coded ones, but standard black ones will do | £3 |
+| Connector | 4 | [1/4" Male 5.08mm Pitch Spade Terminal](https://www.amazon.co.uk/gp/product/B01KYCC7GS) | For the power supply connections | I'd suggest replacing these with screw terminals or similar | £7 |
 | Clamp | 2 | [2" Truss Clamps](https://www.amazon.co.uk/sourcing-map-Aluminum-Lighting-1-89-2-01inch/dp/B0DGLFSM6K) | For mounting the tensioner to a 2" tubular rig frame | For other types of rig frame, you'll need to come up with a different mount | £20 |
 | Power Supply | 2 | 24V >4A DC Power Supply | I'm using a pair of GS120A24-P1M supplies; high quality but with aggressive overvoltage protection. There may be better-suited supplies available | A single >7A supply should also work | £40 |
 | | | | | | **~£380** |
@@ -115,9 +116,9 @@ The vast majority of the cost is the motors.
 ### Laser-Cut Parts
 The structure of the tensioner is comprised of stacked [3mm black cast acrylic sheet](https://kitronik.co.uk/products/value-acrylic-sheet-cast-3mm-x-400mm-x-300mm?variant=39715481124927), because I always have a huge stock of the stuff and it cuts beautifully on my diode laser. It is more than strong enough for the task.
 
-Unless you happen to have a laser cutter, you will need to outsource the cutting of these layered sheets, or come up with your own version of the design. The required files have been provided in both [SVG]() and [DXF]() formats, as these tend to be the supported formats for online quotation systems.
+Unless you happen to have a laser cutter, you will need to outsource the cutting of these layered sheets, or come up with your own version of the design. The required files have been provided in both [SVG](Parts/SVG) and [DXF](Parts/DXF) formats, as these tend to be the supported formats for online quotation systems.
 
-I've obtained a quotation from [RazorLab](https://razorlab.online/) of approximately £125 for the parts to be cut, which is quite a lot. I estimate cutting it on my own machine cost around £15, excluding my time. Make of that what you will.
+As a rough guide I obtained a quotation from [RazorLab](https://razorlab.online/) of approximately £125 for the parts to be cut, which is more than I expected. I estimate cutting it on my own machine cost around £15, excluding my time. Make of that what you will. Loads of laser cutting providers are available.
 
 If using acrylic, these plates can be glued together using a dedicated acrylic bonding agent, or simple Cyanoacrylate (super glue). You could also cut them out of plywood or engineering plastics (where safe to do so).
 
@@ -133,14 +134,7 @@ This design still leaves room for the remaining pins on the Teensy to be utilise
 
 I am planning to design a custom PCB that will make this much neater and remove the need for the acrylic mounting tray (by integrating the mounting lugs into the PCB itself). Once this has been manufactured and tested, I'll make the design available here. I've used [Aisler](https://aisler.net/) before for other projects and intend to use them again.
 
-#### Board Layout
 ![Protoboard](https://github.com/user-attachments/assets/f8910af4-9150-47cc-9a3b-50a3e95b057e)
-
-#### ...Unpopulated
-![Protoboard (Unpopulated)](https://github.com/user-attachments/assets/c33e2eca-f029-4987-a51a-924a5413cab1)
-
-#### ...Traces
-![Protoboard (Traces)](https://github.com/user-attachments/assets/73255be8-d9b6-42a1-8278-645d099a3edd)
 
 #### Power Supply, Connectors & Diodes
 I've used a dual-PSU design in an effort to reduce issues with back-EMF triggering the power supply overvoltage protection. These concerns appear to have been mitigated through the addition of motor braking resistors; though I haven't re-tested with a single supply since adding them.
@@ -180,31 +174,37 @@ Between the previously shown protoboard diagrams and the exploded view of the ac
 5. Check continuity with a multimeter (good connections, no shorts, etc)
 6. Attach the header pins to the Teensy and Transceiver (if absent)
 
+![Protoboard (Unpopulated)](https://github.com/user-attachments/assets/c33e2eca-f029-4987-a51a-924a5413cab1)
+![Protoboard (Traces)](https://github.com/user-attachments/assets/73255be8-d9b6-42a1-8278-645d099a3edd)
+
 ### Motors
 1. Terminate the bare negative and positive (black and red) wires of the motors with the 2x3 header connectors
 2. Terminate the bare CANBUS (yellow and blue) wires of the motors to the 2x1 header connectors
 3. Remove the motor back covers and locate the `BRAKE-RES` pads; soldering lengths of silicone wire to them
-   ![Soldering Brake Leads](https://github.com/user-attachments/assets/b346bfd5-93a2-400f-adeb-af165df15806)
-5. Use a metal file to remove some of the rear cover material, allowing the wires you've soldered through
-   ![Modified Cover](https://github.com/user-attachments/assets/42279f81-b85d-4a73-8861-626f2d3d671a)
-6. Reattach the motor covers, being sure not to pinch the new wires
-   ![Reattached Cover](https://github.com/user-attachments/assets/c67a7f42-6b03-4f35-b11b-db235ba6a57d)
-7. Bolt the acrylic pulley parts onto the motor hubs, sandwiching the lengths of steel wire into the 'S' shaped recess
+4. Use a metal file to remove some of the rear cover material, allowing the wires you've soldered through
+5. Reattach the motor covers, being sure not to pinch the new wires
+
+![Soldering Brake Leads](https://github.com/user-attachments/assets/b346bfd5-93a2-400f-adeb-af165df15806)
+![Modified Cover](https://github.com/user-attachments/assets/42279f81-b85d-4a73-8861-626f2d3d671a)
+![Reattached Cover](https://github.com/user-attachments/assets/c67a7f42-6b03-4f35-b11b-db235ba6a57d)
 
 ### Main Unit
 1. Glue the 'Front Panel' plates together
 2. Glue the 'Rear Panel' plates together
-3. Glue the 'Pulley' plates together (remembering to keep each pulley in two parts so the 'S' plate that retains the steel wire is accessible)
-4. Bolt the 'Pulley' parts and wires onto the motors (ensuring that one side if 'flipped' so the wire winds from the outside edge on both sides)
+3. Assemble the 'Pulley' plates (no need to glue these together), not forgetting to insert the steel wire into the curved recess as you do
+4. Bolt the assmebled pulleys onto the motors (ensuring that one side is 'flipped' so the wire winds from the outside edge on both sides)
 5. Attach the motors (and attached pulleys) to the assembled 'Rear Panel' part using the 12mm M4 bolts
 6. Using the 40mm spacers and 12mm M4 bolts, attach the 'Front Panel' to the 'Rear Panel' (ensuring the previously attached wires exit between the appropriate spacers)
 7. Attach the resistors to the cooling plates using the countersunk screws _or_ thermal adhesive
-   ![image](https://github.com/user-attachments/assets/39eae1f8-831f-4aee-8333-7afe27eb3378)
-9. Attach the cooling plates to the motors using the M4x20mm grubs, spacers and M4x16mm bolts
-   ![Grub Screw & Spacer](https://github.com/user-attachments/assets/fc0af8f1-f449-495e-a08f-32494312bba5)
-   ![Fitted Plates](https://github.com/user-attachments/assets/38b1229f-6ad7-4f11-90d1-b5f4ad3873da)
-10. Attach the protoboard tray to the spacers using the M4x12mm bolts, feeding the wires up from underneath
-    ![Fitted Tray](https://github.com/user-attachments/assets/20adceba-4a37-4b92-ac0b-1307ab532011)
+8. Attach the cooling plates to the motors using the M4x20mm grubs, spacers and M4x16mm bolts   
+9. Attach the protoboard tray to the spacers using the M4x12mm bolts, feeding the wires up from underneath
+
+![Steel Wire Routing](https://github.com/user-attachments/assets/c5c52d2c-5a03-436f-8659-b8882eed2940)
+![Pulley Orientation & Wire Path](https://github.com/user-attachments/assets/b41c111c-2ab0-4dd9-a13c-a804b3a04f8e)
+![Fitted Resistors](https://github.com/user-attachments/assets/39eae1f8-831f-4aee-8333-7afe27eb3378)
+![Grub Screw & Spacer](https://github.com/user-attachments/assets/fc0af8f1-f449-495e-a08f-32494312bba5)
+![Fitted Plates](https://github.com/user-attachments/assets/38b1229f-6ad7-4f11-90d1-b5f4ad3873da)
+![Fitted Tray](https://github.com/user-attachments/assets/20adceba-4a37-4b92-ac0b-1307ab532011)
 
 ### Belt Loops
 1. Pre-tap the 'Belt Loop' plate holes with M4 threads (you won't be able to do this once the plates are glued)
@@ -223,17 +223,21 @@ TBC
 
 #### Motor Identifiers
 Each motor on the CANBUS needs to have a unique identifier set. There are two ways to do this:
-- Adjust the DIP switches on the back of each motor to set the identifier physically (see the motor manual for details)
+- Adjust the DIP switches on the back of each motor to set the identifier physically:
+   | Identifier | SW1 | SW2 | SW3 |
+   | --- | --- | --- | --- |
+   | 1   | OFF | OFF | OFF |
+   | 2   | ON  | OFF | OFF |
 - Launch the [LK Motor Tool](http://en.lkmotor.cn/Download.aspx?ClassID=45), connect to the motor and set the `Driver ID` value
 
-In either case the _TBC_ motor should be `1` and the _TBC_ motor should be `2` (when looking at the tensions from the rear of your rig).
+In the configuration I've used, the  _right_ motor should have identifier `1` and the _left_ motor should be `2` (when looking at the tensioner from the rear of your rig).
 
 #### CANBUS Termination
 A CANBUS consists of two wires (`High` & `Low`) with any number of devices connected along its length. At each end of the wires we need a 120Ohm Termination Resistor for the CANBUS to function.
 
 Our _Transciever_ board has one of these built in, so we just need to add another at the other end, which will be one of our motors. Thankfully these motors have these built-in, and we just need to use the DIP switches on the back to set this to _enabled_ for the terminating motor and _disabled_ for the non-terminating one.
 
-In the configuration I've used, the _TBC_ motor is at the end of the BUS, so that's the one we want it enabled on (see the motor manual for details).
+In the configuration I've used, the _right_ motor is at the end of the BUS, so that's the one we want it enabled on (set the `R`/`4` switch to `ON`).
 
 Alternatively you could solder your own 120Ohm resistor across the top of the blue CANBUS headers on the protoboard.
 
@@ -244,12 +248,12 @@ Alternatively you could solder your own 120Ohm resistor across the top of the bl
 4. Click `Save Setting`, reboot the motor, then click `Motor On` and measure the voltage across the resistor, to confirm it is essentially zero while the motor is idle. If you've gotten the voltage value wrong, this will be non-zero and the resistor will be rapidly heating up (that's bad; go back and adjust raise the value)
 5. With the motor held firm, assertively pull the wire attached to the motor drum to back-drive the motor while monitoring the voltage across the resistor. The motor should heavily resist rotation and a voltage should be seen across the resistorwhich should spike while you do so and return to zero afterwards (importantly, the PSU should also not cut-out due to the motor being backdriven)
 
-> **Note:** If you're using a dual PSU setup like me, don't assume both supplies will have the exact same output voltage; measure both and then label the suplies so you don't mix them up later. The votlage tolerances are small make the braking resistors not function properly.
+> **Note:** If you're using a dual PSU setup like me, don't assume both supplies will have the exact same output voltage; measure both and then label the suplies so you don't mix them up later.
 
 ### Usage
 TBC
 
-## Known Issues & Troublehsooting
+## Known Issues & Troubleshooting
 - Some games (e.g. _Test Drive Unlimited: Solare Crown_) seem to send erratic telemetry data, causing the belts to sharply
   tighten unexpectedly. This could be due to the game's telemetry being borked, or due to a bug in the control code. This
   needs further investigation
