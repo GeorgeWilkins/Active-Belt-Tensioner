@@ -116,7 +116,7 @@ The vast majority of the cost is the motors.
 ### Laser-Cut Parts
 The structure of the tensioner is comprised of stacked [3mm black cast acrylic sheet](https://kitronik.co.uk/products/value-acrylic-sheet-cast-3mm-x-400mm-x-300mm?variant=39715481124927), because I always have a huge stock of the stuff and it cuts beautifully on my diode laser. It is more than strong enough for the task.
 
-Unless you happen to have a laser cutter, you will need to outsource the cutting of these layered sheets, or come up with your own version of the design. The required files have been provided in both [SVG](Parts/SVG) and [DXF](Parts/DXF) formats, as these tend to be the supported formats for online quotation systems.
+Unless you happen to have a laser cutter, you will need to outsource the cutting of these layered sheets, or come up with your own version of the design. The required files have been provided in both [SVG](/Parts/Acrylic/SVG) and [DXF](/Parts/Acrylic/DXF) formats, as these tend to be the supported formats for online quotation systems.
 
 As a rough guide I obtained a quotation from [RazorLab](https://razorlab.online/) of approximately £125 for the parts to be cut, which is more than I expected. I estimate cutting it on my own machine cost around £15, excluding my time. Make of that what you will. Loads of laser cutting providers are available.
 
