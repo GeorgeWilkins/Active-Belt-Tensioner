@@ -222,12 +222,12 @@ For tubular steel racing rigs, simply attach the two truss clamps to the back of
 
 The exact configuration of your belts will depend on your rig, but the wires coming out of the tensioner should roughly line up with the centers of your seat's belt holes; or at least close enough not to be a problem.
 
-Plug a USB cable into the Teensy and run it to your computer, then attach your power supply/supplies to the protoboard connectors.
+Don't hook anything else up until you've completed the other steps below.
 
 ![Attached To Frame](https://github.com/user-attachments/assets/0a940c39-5a37-4c69-91cc-d7bfce869a2b)
 
-### Motor Identifiers & Termintion Resistor
-Each motor on the CANBUS needs to have a unique identifier set. We also need to enable the built-in 120Ohm termination resistor on the motor that sits at the end of the bus (with our transceiver already providing one at the start of the bus).
+### Motor Identifiers & Termination Resistor
+Each motor on the CANBUS needs to have a unique identifier set. We also need to enable the built-in 120Ohm termination resistor on the specific motor that sits at the end of the bus (with our transceiver already providing one at the start of the bus).
 
 In my configuration, the  _right_ motor should have identifier `1` and the _left_ motor should be `2` (when looking at the tensioner from the rear of your rig). The _right_ motor is also the terminating motor, so we need to enable its resistor and disable the _left_ motor's resistor.
 
@@ -238,7 +238,7 @@ We do all of this by setting the DIP switches on the back of each motor:
 | Left  | 1          | ON  | OFF | OFF | OFF     |
 | Right | 2          | OFF | OFF | OFF | ON      |
 
-See the [motor manual](http://en.lkmotor.cn/Download.aspx?ClassID=21) for more information or different configurations.
+See the [motor manual](http://en.lkmotor.cn/Download.aspx?ClassID=21) for more information or for setting different configurations.
 
 ### Braking Resistor Tuning
 In order for the braking resistors to work, we need to tell each motor controller at what voltage threshold it should dump energy into the resistor.
@@ -256,40 +256,49 @@ I'd suggest the following approach:
 4. Click `Save Setting`, reboot the motor, then click `Motor On` and measure the voltage across the resistor, to confirm it is _zero_ while the motor is idle. If you've set the `Brake Resistor Voltage` value _too low_, this will be something like `12V` and the resistor will be rapidly heating up (that's bad). If so, go back and adjust raise the value; otherwise continue
 5. With the tensioner held firm, assertively pull the steel wire attached to the motor pulley to back-drive the motor (while monitoring the voltage across the resistor). The motor should heavily resist rotation and a voltage should be seen across the resistor while you pull (importantly, the PSU should also not cut-out due to the motor being backdriven)
 
-I queried LK Tech for assistance in setting up this seemingly undocumented feature. They were less than helpful; giving me _bad_ information that I thankfully double-checked before applying. There may be better ways to configure this or otherwise handle the back-EMF issue. If anyone better informed on this has any input, please let me know.
+I queried _LKTech_ for assistance in setting up this seemingly undocumented feature. They were less than helpful; giving me _bad_ information that I thankfully double-checked before applying. There may be better ways to configure this or otherwise handle the back-EMF issue. If anyone better informed on this has any input, please let me know.
 
 ### Flashing The Teensy
-There is a [good tutorial](https://www.pjrc.com/teensy/tutorial.html) available if you've never used a Teensy before. It's basically the same as an Arduino, but there are a couple extra steps to take when getting it set up.
+There is a [good tutorial](https://www.pjrc.com/teensy/tutorial.html) available if you've never used a Teensy before. It's basically the same as an Arduino, but there are a couple extra steps to take when first getting it set up.
 
 The required Arduino 'Sketch' is [included in this repository](/Teensy), so download it and open it in the Arduino IDE. Follow the flashing process as shown by the tutorial.
 
 After flashing, _Windows Device Manager_ should see a new `USB Serial Device` under `Ports (COM & LPT)`, along with a numbered `COM` port. That's the one we'll be selecting in SimHub.
 
 ### Configuring SimHub
+Now that the Teensy is plugged in and flashed, we can tell SimHub to use it.
+
 We're going to make use of a SiumHub feature called [Custom Serial Devices](https://github.com/SHWotever/SimHub/wiki/Custom-serial-devices), which allows us to tell SimHub to send formatted telemetry to any device that enumerates as a serial port on the computer.
 
-The link above covers how to access this feature. If you'd like this to be configured for you, download the [Device.shsds](/SimHub/Device.shsds) file and import it under `Export And Import` > `Import Settings`. This will do everything for you except for select the correct `Serial Port` (which which there is likely only going to be one anyway).
+The link above covers how to access this feature. If you'd like this to be configured for you, download the [Device.shsds](/SimHub/Device.shsds) file and import it under `Export And Import` > `Import Settings`. This will do everything for you, except for select the correct `Serial Port` (which which there is likely only going to be one anyway).
+
+If you make changes you can also use `Export Settings` to create a new version of this file for future use.
+
+With this done you should be clear to power up the motors.
 
 ## Usage
-Once you've added the device to SimHub, there should be no more steps; the tensioner is good to go. It will apply the given _idle torque_ whenever no telemetry is being received (between games and while in menus).
+While powered, the tensioner will always apply the given _idle torque_ whenever no telemetry is being received (between games and while in menus).
 
 This is useful when getting in/out of the seat and fitting/releasing the harness, as it automatically takes up any slack. Ideally the _idle torque_ value you set will be not quite enough to overcome the weight of your belts, but enough to reel them in when you're taking their weight by holding them.
 
 If you wish to have control over the belts, put their power supply/supplies on a separate switched mains cable and just turn them on/off as needed. They'll automatically reconnect and function once power is restored.
 
 ## Known Issues & Troubleshooting
-- Some games (e.g. _Test Drive Unlimited: Solare Crown_) seem to send erratic telemetry data, causing the belts to sharply
-  tighten unexpectedly. This could be due to the game's telemetry being borked, or due to a bug in the control code. This
+- Some games (e.g. _Test Drive Unlimited: Solar Crown_) occaisionally send erratic telemetry data, which can cause the belts to sharply
+  tighten and release unexpectedly. This could be due to the game's telemetry being borked, or due to a bug in the control code. This
   needs further investigation
-- If the motor controller braking voltage is not set appropriately for the power supply used (or not updated when the power
-  supply is changed), the following may happen:
-  - The motors cut-out repeatedly due to over-voltage protection kicking in (the braking ressitors are not activated)
-  - The motor controller continuously dumps power into the braking resistors, causing them to overheat and **potentially
-    catch fire**
+- Incorrect configuration of the motor braking resistors will cause significant issues with operation; either regular drop-outs of the
+  power supply or overheating of the resitors. At the moment mine works reliably with the current configuration; but it's likely to
+  depend very much on the power supply you use
+- The _LKTech_ CANBUS protocol documentation isn't clear about how the torque commands scale with different motor sizes. I've experimentally found that either:
+  - Torque values are extremely _non-linear_, with most higher values in the allowed `-2048`~`2048` range being clamped to 100% of the motor's available torque
+  - Torque values are treated as _absolute_; meaning if `30A` is the maximum current represented by value of `2048`, a motor with a `3A` maximum can only use values up to `204`. I'm not sure about this though; needs further investigation
+- Possibly due to the above, the torque can occaisionally feel a little lumpy; not as smooth as it could be. This is almost certainly improvable with software tweaks
 
 ## Questions & Answers
 - **How can I contact you?**
-  - Best to [message me via Reddit](https://www.reddit.com/user/XG3OX/)
+  - For technical queries and submissions, [create an issue](/issues)
+  - For other enquiries, best to [message me via Reddit](https://www.reddit.com/user/XG3OX/)
 - **Can I sell this design (or a derivative)?**
   - Yes. I've used the MIT license to permit this, subject to some kind of attribution being included
   - This includes being permitted to make kits available (e.g. the laser cut parts, fittings, etc)
