@@ -1,5 +1,5 @@
 # Stacked Acrylic Parts
-The [SVG](/Acrylic/SVG) and [DXF](/Acrylic/DXF) files within this directory are suitable for cutting from 3mm acrylic sheet, then being glued together into a number of distinct parts:
+The [SVG](/Parts/Acrylic/SVG) and [DXF](/Parts/Acrylic/DXF) files within this directory are suitable for cutting from 3mm acrylic sheet, then being glued together into a number of distinct parts:
 - **Front Panel**: The fascia visible at the front of the tensioner, separated from the rest of the body by 40mm aluminium spacers
 - **Rear Panel**: The main body of the tensioner, to which the motors and truss clamps are bolted
 - **Pulley (x 2)**: The attachments to the motors around which the steel wire wraps (_don't glue these together_; or at least keep each pulley in two halves to allow insertion and removal of the steel wire)
