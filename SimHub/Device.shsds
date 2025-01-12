@@ -1,11 +1,11 @@
 {
-  "AutomaticReconnect": false,
-  "SerialPortName": "COM3",
+  "AutomaticReconnect": true,
+  "SerialPortName": null,
   "StartupDelayMs": 0,
   "IsConnecting": false,
-  "IsEnabled": true,
+  "IsEnabled": false,
   "LogIncomingData": false,
-  "IsConnected": true,
+  "IsConnected": false,
   "BaudRate": 57600,
   "DtrEnable": true,
   "RtsEnable": true,
@@ -61,7 +61,7 @@
       "Message": {
         "JSExt": 0,
         "Interpreter": 1,
-        "Expression": "//$prop('AccelerationSurge')\r\n//$prop('AccelerationSway'): treat -6 to 6 as dead zone, ~20 is hard corner, negative is turning right\r\n//$prop('AccelerationHeave')\r\n\r\n// Read Settings\r\nlet torqueAtRest = $prop('Settings.torqueAtRest') * 0.001;\r\nlet torqueAtMaximumAcceleration = $prop('Settings.torqueAtMaximumAcceleration') * 0.001;\r\nlet torqueAtMaximumDeceleration = $prop('Settings.torqueAtMaximumDeceleration') * 0.001;\r\n\r\nconst surgeMaximum = 25;\r\nconst surgeMinimum = 15;\r\nconst swayMaximum = 25;\r\n\r\n// Calculate Surge\r\nlet surgeRaw = Math.max(surgeMinimum * -1, Math.min(surgeMaximum, $prop('AccelerationSurge')));\r\nlet surgePercent = (surgeRaw >= 0)\r\n    ? (surgeRaw / surgeMaximum)\r\n    : (surgeRaw / surgeMinimum);\r\nlet surgeTorque = torqueAtRest + ((surgePercent >= 0)\r\n\t? (surgePercent * (torqueAtMaximumDeceleration - torqueAtRest))\r\n    : (Math.abs(surgePercent) * (torqueAtMaximumAcceleration - torqueAtRest))\r\n);\r\n\r\n// Calculate Sway\r\nlet swayRaw = Math.max(swayMaximum * -1, Math.min(swayMaximum, $prop('AccelerationSway')));\r\nlet swayPercent = (swayRaw / swayMaximum);\r\n\r\n\r\n\r\n\r\nlet leftTorque = Math.min(1, surgeTorque + Math.max(swayPercent, 0));\r\nlet rightTorque = Math.min(1, surgeTorque - Math.min(swayPercent, 0));\r\n\r\n// Return Telemetry\r\nreturn '|' + [\r\n\tMath.round(leftTorque * 1000),\r\n    Math.round(rightTorque * 1000),\r\n    Math.round(torqueAtRest * 1000),\r\n].join(',');"
+        "Expression": "// Read Device Settings\r\nlet torqueAtRest = $prop('Settings.torqueAtRest') * 0.001;\r\nlet torqueAtMaximumAcceleration = $prop('Settings.torqueAtMaximumAcceleration') * 0.001;\r\nlet torqueAtMaximumDeceleration = $prop('Settings.torqueAtMaximumDeceleration') * 0.001;\r\n\r\nconst surgeMaximum = 25;\r\nconst surgeMinimum = 15;\r\nconst swayMaximum = 25;\r\n\r\n// Calculate Surge\r\nlet surgeRaw = Math.max(surgeMinimum * -1, Math.min(surgeMaximum, $prop('AccelerationSurge')));\r\nlet surgePercent = (surgeRaw >= 0)\r\n    ? (surgeRaw / surgeMaximum)\r\n    : (surgeRaw / surgeMinimum);\r\nlet surgeTorque = torqueAtRest + ((surgePercent >= 0)\r\n\t? (surgePercent * (torqueAtMaximumDeceleration - torqueAtRest))\r\n    : (Math.abs(surgePercent) * (torqueAtMaximumAcceleration - torqueAtRest))\r\n);\r\n\r\n// Calculate Sway\r\nlet swayRaw = Math.max(swayMaximum * -1, Math.min(swayMaximum, $prop('AccelerationSway')));\r\nlet swayPercent = (swayRaw / swayMaximum);\r\n\r\n// Calculate Torque\r\nlet leftTorque = Math.min(1, surgeTorque + Math.max(swayPercent, 0));\r\nlet rightTorque = Math.min(1, surgeTorque - Math.min(swayPercent, 0));\r\n\r\n// Return Telemetry\r\nreturn '|' + [\r\n\tMath.round(leftTorque * 1000),\r\n    Math.round(rightTorque * 1000),\r\n    Math.round(torqueAtRest * 1000),\r\n].join(',');\r\n"
       },
       "IsEnabled": true,
       "MaximumFrequency": 60
