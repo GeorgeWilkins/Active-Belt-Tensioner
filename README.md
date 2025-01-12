@@ -158,6 +158,7 @@ I'm also not sure if the protection diodes are actually necessary. I added them 
 - **JST Crimping Tool:** For attaching the JST connectors to the unterminated motor leads
 
 ## Source Files
+- [Sketchup Design](Design.skp)
 - [Arduino / Teensy Code](/Teensy)
 - [SimHub JS Code](/SimHub/Device.js)
 - [SimHub Importable Device](/SimHub/Device.shsds)
@@ -297,23 +298,24 @@ If you wish to have control over the belts, put their power supply/supplies on a
 
 ## Questions & Answers
 - **How can I contact you?**
-  - For technical queries and submissions, [create an issue](/issues)
+  - For technical queries, corrections and submissions, please [create an issue](/issues)
   - For other enquiries, best to [message me via Reddit](https://www.reddit.com/user/XG3OX/)
 - **Can I sell this design (or a derivative)?**
   - Yes. I've used the MIT license to permit this, subject to some kind of attribution being included
   - This includes being permitted to make kits available (e.g. the laser cut parts, fittings, etc)
 - **Will you supply me with the laser-cut parts?**
-  - Maybe. I'm not equipped to run a laser cutting service, but may do acrylic kits for people in the UK
+  - Maybe. I'm not equipped to run a laser cutting service, but may do acrylic kits for small numbers of people in the UK
 - **How do I mount this to my aluminium profile rig?**
-  - This has been designed to clamp onto 2" tubing rigs using a pair of truss clamps, not aluminium profile
+  - This has been designed to clamp onto 2" tubing rigs (such as the [GT Omega Titan](https://www.gtomega.co.uk/products/titan-cockpit)) using a pair of truss clamps, not aluminium profile
   - If you want to do this, you'll need to come up with your own mounting solution
-  - If there is enough intereest I'll have a look at making the design support universal fitting 
+  - If there is enough intereest I'll have a look at making the design support universal fitting
 - **Where are the files for the belt rollers?**
   - I considered adding them, but since they're so specific to my rig and chosen seat, they are almost certainly going to be useless to you
+  - The design is available inside the [Sketchup File](Design.skp) if you want it
   - Whether these are actually needed or not will depend on your seat's design. You may be better off just sticking some nylon/acetal rods in the belt holes for the belts to run over
 - **Why use 1/4x1" aluminium bars for the cooling plates?**
   - It's cheaper than having a full plate laser or water-jet cut and can be trimmed/drilled with basic tools
-  - You could come up with a custom cut plate if you like, but it didn't seem worth it
+  - You could come up with a custom cut plate if you like
 - **Is active cooling needed?**
   - Not as far as I've observed; the motors and their controllers barely get warm
   - The load we're putting these motors under is actually pretty light and not continuous-duty
