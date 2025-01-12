@@ -192,12 +192,14 @@ Between the previously shown protoboard diagrams and the exploded view of the ac
 1. Glue the 'Front Panel' plates together
 2. Glue the 'Rear Panel' plates together
 3. Assemble the 'Pulley' plates (no need to glue these together), not forgetting to insert the steel wire into the curved recess as you do
-4. Bolt the assmebled pulleys onto the motors (ensuring that one side is 'flipped' so the wire winds from the outside edge on both sides)
-5. Attach the motors (and attached pulleys) to the assembled 'Rear Panel' part using the 12mm M4 bolts
-6. Using the 40mm spacers and 12mm M4 bolts, attach the 'Front Panel' to the 'Rear Panel' (ensuring the previously attached wires exit between the appropriate spacers)
-7. Attach the resistors to the cooling plates using the countersunk screws _or_ thermal adhesive
-8. Attach the cooling plates to the motors using the M4x20mm grubs, spacers and M4x16mm bolts   
-9. Attach the protoboard tray to the spacers using the M4x12mm bolts, feeding the wires up from underneath
+4. Bolt the assembled pulleys onto the motors using the M5x16mm screws (ensuring one side is 'flipped' so the wire winds from the outside edge on both sides)
+5. Attach the motors to the assembled 'Rear Panel' part using the 12mm M4 bolts
+6. Using the 40mm spacers and 12mm M4 bolts, attach the 'Front Panel' to the 'Rear Panel' (ensuring the steel wires exit between the indicated spacers)
+7. Attach the resistors to the aluminium cooling plates using the countersunk screws _or_ thermal adhesive
+8. Attach the cooling plates to the motors using the M4x20mm grubs, spacers and M4x16mm bolts
+9. Solder the resistor wires previously attached to the motors to the resistor terminals (heat-shrinking the connections to prevent shorts)
+10. Attach the protoboard tray to the spacers using the M4x12mm bolts, feeding the data and power wires up from underneath
+11. Attach the 2" truss clamps to the large holes at the base of the tensioner assembly
 
 ![Steel Wire Routing](https://github.com/user-attachments/assets/c5c52d2c-5a03-436f-8659-b8882eed2940)
 ![Pulley Orientation & Wire Path](https://github.com/user-attachments/assets/b41c111c-2ab0-4dd9-a13c-a804b3a04f8e)
@@ -208,9 +210,9 @@ Between the previously shown protoboard diagrams and the exploded view of the ac
 
 ### Belt Loops
 1. Pre-tap the 'Belt Loop' plate holes with M4 threads (you won't be able to do this once the plates are glued)
-2. Glue the 'Belt Loop' plates together, such that the 'slotted' plaate is in the middle and the threaded plates are on the outside
+2. Glue the 'Belt Loop' plates together, such that the 'slotted' plate is in the middle and the threaded plates are on the outside
 3. Fit the M4 grub screws into the threaded holes, leaving a gap for the wire
-4. Feed the steel wire into the hole and tighten the grub screws to retain the wire (use a looser fit when first testing your setup)
+4. Feed the steel wire into the slot (which now forms a hole in the assmebled part) and tighten the grub screws to retain the wire
 
 ## Setup & Usage
 TBC
