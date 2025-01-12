@@ -205,16 +205,28 @@ TBC
 ### Configuration
 TBC
 
-#### CANBUS Termination
-TBC
-
 #### Motor Identifiers
-TBC
+Each motor on the CANBUS needs to have a unique identifier set. There are two ways to do this:
+- Adjust the DIP switches on the back of each motor to set the identifier physically (see the motor manual for details)
+- Launch the [LK Motor Tool](http://en.lkmotor.cn/Download.aspx?ClassID=45), connect to the motor and set the `Driver ID` value
 
-#### Motor Tuning
-1. Measure the _exact_ unloaded output voltage of your chosen power supply with a multimeter
-2. Set the 'Braking Voltage' in the LKTech configuration tool to be fractionally higher than the measured voltage (+0.1V)
-TBC
+In either case the _TBC_ motor should be `1` and the _TBC_ motor should be `2` (when looking at the tensions from the rear of your rig).
+
+#### CANBUS Termination
+A CANBUS consists of two wires (`High` & `Low`) with any number of devices connected along its length. At each end of the wires we need a 120Ohm Termination Resistor for the CANBUS to function.
+
+Our _Transciever_ board has one of these built in, so we just need to add another at the other end, which will be one of our motors. Thankfully these motors have these built-in, and we just need to use the DIP switches on the back to set this to _enabled_ for the terminating motor and _disabled_ for the non-terminating one.
+
+In the configuration I've used, the _TBC_ motor is at the end of the BUS, so that's the one we want it enabled on (see the motor manual for details).
+
+#### Resistor Tuning
+1. Measure the _exact_ unloaded output voltage of your chosen power supply with a multimeter (for a '24V' supply this might actually be something like 24.15V)
+2. Launch the [LK Motor Tool](http://en.lkmotor.cn/Download.aspx?ClassID=45) and connect to the motor using the serial cable and adapter provided with the motor
+3. Set the `Brake Resistor Control` to `Yes` and the `Brake Resistor Voltage` to be just above the measured PSU voltage (roughly +0.10V). This should be _less_ than your PSU's _overvoltage threshold_
+4. Click `Save Setting`, reboot the motor, then click `Motor On` and measure the voltage across the resistor, to confirm it is essentially zero while the motor is idle. If you've gotten the voltage value wrong, this will be non-zero and the resistor will be rapidly heating up (that's bad; go back and adjust raise the value)
+5. With the motor held firm, assertively pull the wire attached to the motor drum to back-drive the motor while monitoring the voltage across the resistor. The motor should heavily resist rotation and a voltage should be seen across the resistorwhich should spike while you do so and return to zero afterwards (importantly, the PSU should also not cut-out due to the motor being backdriven)
+
+> **Note:** If you're using a dual PSU setup like me, don't assume both supplies will have the exact same output voltage; measure both and then label the suplies so you don't mix them up later. The votlage tolerances are small make the braking resistors not function properly.
 
 ### Usage
 TBC
