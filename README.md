@@ -214,46 +214,68 @@ Between the previously shown protoboard diagrams and the exploded view of the ac
 3. Fit the M4 grub screws into the threaded holes, leaving a gap for the wire
 4. Feed the steel wire into the slot (which now forms a hole in the assmebled part) and tighten the grub screws to retain the wire
 
-## Setup & Usage
-TBC
+![Fitted Loop](https://github.com/user-attachments/assets/f9eeb6c1-c851-4e07-9f8d-e53c890dafc2)
 
+## Initial Setup
 ### Installation
-TBC
+For tubular steel racing rigs, simply attach the two truss clamps to the back of your frame. For other types, you'll need to come up with your own fixture.
 
-### Configuration
-TBC
+The exact configuration of your belts will depend on your rig, but the wires coming out of the tensioner should roughly line up with the centers of your seat's belt holes; or at least close enough not to be a problem.
 
-#### Motor Identifiers
-Each motor on the CANBUS needs to have a unique identifier set. There are two ways to do this:
-- Adjust the DIP switches on the back of each motor to set the identifier physically:
-   | Identifier | SW1 | SW2 | SW3 |
-   | --- | --- | --- | --- |
-   | 1   | OFF | OFF | OFF |
-   | 2   | ON  | OFF | OFF |
-- Launch the [LK Motor Tool](http://en.lkmotor.cn/Download.aspx?ClassID=45), connect to the motor and set the `Driver ID` value
+Plug a USB cable into the Teensy and run it to your computer, then attach your power supply/supplies to the protoboard connectors.
 
-In the configuration I've used, the  _right_ motor should have identifier `1` and the _left_ motor should be `2` (when looking at the tensioner from the rear of your rig).
+![Attached To Frame](https://github.com/user-attachments/assets/0a940c39-5a37-4c69-91cc-d7bfce869a2b)
 
-#### CANBUS Termination
-A CANBUS consists of two wires (`High` & `Low`) with any number of devices connected along its length. At each end of the wires we need a 120Ohm Termination Resistor for the CANBUS to function.
+### Motor Identifiers & Termintion Resistor
+Each motor on the CANBUS needs to have a unique identifier set. We also need to enable the built-in 120Ohm termination resistor on the motor that sits at the end of the bus (with our transceiver already providing one at the start of the bus).
 
-Our _Transciever_ board has one of these built in, so we just need to add another at the other end, which will be one of our motors. Thankfully these motors have these built-in, and we just need to use the DIP switches on the back to set this to _enabled_ for the terminating motor and _disabled_ for the non-terminating one.
+In my configuration, the  _right_ motor should have identifier `1` and the _left_ motor should be `2` (when looking at the tensioner from the rear of your rig). The _right_ motor is also the terminating motor, so we need to enable its resistor and disable the _left_ motor's resistor.
 
-In the configuration I've used, the _right_ motor is at the end of the BUS, so that's the one we want it enabled on (set the `R`/`4` switch to `ON`).
+We do all of this by setting the DIP switches on the back of each motor:
 
-Alternatively you could solder your own 120Ohm resistor across the top of the blue CANBUS headers on the protoboard.
+| Motor | Identifier | SW1 | SW2 | SW3 | SW4 (R) |
+| ----- | ---------- | --- | --- | --- | ------- |
+| Left  | 1          | ON  | OFF | OFF | OFF     |
+| Right | 2          | OFF | OFF | OFF | ON      |
 
-#### Resistor Tuning
-1. Measure the _exact_ unloaded output voltage of your chosen power supply with a multimeter (for a '24V' supply this might actually be something like 24.15V)
-2. Launch the [LK Motor Tool](http://en.lkmotor.cn/Download.aspx?ClassID=45) and connect to the motor using the serial cable and adapter provided with the motor
-3. Set the `Brake Resistor Control` to `Yes` and the `Brake Resistor Voltage` to be just above the measured PSU voltage (roughly +0.10V). This should be _less_ than your PSU's _overvoltage threshold_
-4. Click `Save Setting`, reboot the motor, then click `Motor On` and measure the voltage across the resistor, to confirm it is essentially zero while the motor is idle. If you've gotten the voltage value wrong, this will be non-zero and the resistor will be rapidly heating up (that's bad; go back and adjust raise the value)
-5. With the motor held firm, assertively pull the wire attached to the motor drum to back-drive the motor while monitoring the voltage across the resistor. The motor should heavily resist rotation and a voltage should be seen across the resistorwhich should spike while you do so and return to zero afterwards (importantly, the PSU should also not cut-out due to the motor being backdriven)
+See the [motor manual](http://en.lkmotor.cn/Download.aspx?ClassID=21) for more information or different configurations.
 
-> **Note:** If you're using a dual PSU setup like me, don't assume both supplies will have the exact same output voltage; measure both and then label the suplies so you don't mix them up later.
+### Braking Resistor Tuning
+In order for the braking resistors to work, we need to tell each motor controller at what voltage threshold it should dump energy into the resistor.
 
-### Usage
-TBC
+This voltage must be _above_ the output voltage of the '24V' power supply (`23.9V`, `24.05V`, `24.15V`, etc) but below the threshold at which your specific power supply triggers its internal overvoltage protection.
+
+Get this _too high_, and the braking resistor won't activat before the OVP does, and your power supply will likely go into protection mode regularly. Get this _too low_ and the motor controller will be dumping energy into the resistors continuously, resulting in the resistors getting _very_ hot and the motors not running properly. Both scenarios should be pretty obvious during testing.
+
+In practice, with my Meanwell supplies (with their aggressive overvoltage protection), this meant I had to be no more than `0.1V` above their typical output voltage for this all to work.
+
+I'd suggest the following approach:
+1. Measure the _exact_ unloaded output voltage of your chosen power supply with a multimeter
+2. Launch the [LK Motor Tool](http://en.lkmotor.cn/Download.aspx?ClassID=45) and connect to the motor using the serial cable and USB adapter provided with the motor
+3. Set the `Brake Resistor Control` to `Yes` and the `Brake Resistor Voltage` to be _just above_ the measured PSU voltage (roughly +0.10V). You might want to start with slightly higher values to see where your PSU OVP kicks in
+4. Click `Save Setting`, reboot the motor, then click `Motor On` and measure the voltage across the resistor, to confirm it is _zero_ while the motor is idle. If you've set the `Brake Resistor Voltage` value _too low_, this will be something like `12V` and the resistor will be rapidly heating up (that's bad). If so, go back and adjust raise the value; otherwise continue
+5. With the tensioner held firm, assertively pull the steel wire attached to the motor pulley to back-drive the motor (while monitoring the voltage across the resistor). The motor should heavily resist rotation and a voltage should be seen across the resistor while you pull (importantly, the PSU should also not cut-out due to the motor being backdriven)
+
+I queried LK Tech for assistance in setting up this seemingly undocumented feature. They were less than helpful; giving me _bad_ information that I thankfully double-checked before applying. There may be better ways to configure this or otherwise handle the back-EMF issue. If anyone better informed on this has any input, please let me know.
+
+### Flashing The Teensy
+There is a [good tutorial](https://www.pjrc.com/teensy/tutorial.html) available if you've never used a Teensy before. It's basically the same as an Arduino, but there are a couple extra steps to take when getting it set up.
+
+The required Arduino 'Sketch' is [included in this repository](/Teensy), so download it and open it in the Arduino IDE. Follow the flashing process as shown by the tutorial.
+
+After flashing, _Windows Device Manager_ should see a new `USB Serial Device` under `Ports (COM & LPT)`, along with a numbered `COM` port. That's the one we'll be selecting in SimHub.
+
+### Configuring SimHub
+We're going to make use of a SiumHub feature called [Custom Serial Devices](https://github.com/SHWotever/SimHub/wiki/Custom-serial-devices), which allows us to tell SimHub to send formatted telemetry to any device that enumerates as a serial port on the computer.
+
+The link above covers how to access this feature. If you'd like this to be configured for you, download the [Device.shsds](/SimHub/Device.shsds) file and import it under `Export And Import` > `Import Settings`. This will do everything for you except for select the correct `Serial Port` (which which there is likely only going to be one anyway).
+
+## Usage
+Once you've added the device to SimHub, there should be no more steps; the tensioner is good to go. It will apply the given _idle torque_ whenever no telemetry is being received (between games and while in menus).
+
+This is useful when getting in/out of the seat and fitting/releasing the harness, as it automatically takes up any slack. Ideally the _idle torque_ value you set will be not quite enough to overcome the weight of your belts, but enough to reel them in when you're taking their weight by holding them.
+
+If you wish to have control over the belts, put their power supply/supplies on a separate switched mains cable and just turn them on/off as needed. They'll automatically reconnect and function once power is restored.
 
 ## Known Issues & Troubleshooting
 - Some games (e.g. _Test Drive Unlimited: Solare Crown_) seem to send erratic telemetry data, causing the belts to sharply
