@@ -121,7 +121,10 @@ I've obtained a quotation from [RazorLab](https://razorlab.online/) of approxima
 
 If using acrylic, these plates can be glued together using a dedicated acrylic bonding agent, or simple Cyanoacrylate (super glue). You could also cut them out of plywood or engineering plastics (where safe to do so).
 
-![Construction](https://github.com/user-attachments/assets/912797b4-8dd1-4cdb-b3e0-1440d6d163f4)
+![3D Model](https://github.com/user-attachments/assets/98aa0188-43af-408b-a2b8-425b154f2767)
+![3D Model (Rear)](https://github.com/user-attachments/assets/49c8676e-2fd1-4ed2-837d-c35ee4c1bfd2)
+![3D Model (Exploded)](https://github.com/user-attachments/assets/b7757561-fb88-4138-bf5a-786923bcc3ef)
+
 
 ### Protoboard PCB
 The current prototype uses a standard 40x60mm protoboard and can be assembled by anyone familiar with a soldering iron. The designs below are a simplified version; the one I'm running has unnecessary components and traces for development and testing purposes.
@@ -157,6 +160,7 @@ I'm also not sure if the protection diodes are actually necessary. I added them 
 - **Wire Strippers / Pilers:** For trimming and removing insulation from wires
 - **Allen Key Set:** For attaching the motors to the cooling plates
 - **Hacksaw / Jigsaw / Bandsaw:** For trimming the aluminium bars
+- **Metal File:** For rounding off the aluminium bar ends and modifying the motor housings
 - **JST Crimping Tool:** For attaching the JST connectors to the unterminated motor leads
 
 ## Source Files
@@ -168,20 +172,24 @@ I'm also not sure if the protection diodes are actually necessary. I added them 
 ## Assembly
 Between the previously shown protoboard diagrams and the exploded view of the acrylic plates, the process of physically putting together the tensioner unit should be fairly obvious. Notes on which fasteners are used where are included in the [list of parts](#parts-materials--pricing) above.
 
-Any notable details are included below.
-
 ### Protoboard
 1. Attach the various headers to the board
 2. Attach the spade terminals and diodes (where using these)
 3. Attach the zero-ohm links (or equivalent insulated wire)
-4. Referencing the [traces diagram](#traces), cut and bend solid-core wire to match and solder to the board
+4. Cut and bend solid-core wire to match and solder to the board as traces
 5. Check continuity with a multimeter (good connections, no shorts, etc)
-6. Attach the pins to the Teensy and Transceiver, where not already done
+6. Attach the header pins to the Teensy and Transceiver (if absent)
 
 ### Motors
 1. Terminate the bare negative and positive (black and red) wires of the motors with the 2x3 header connectors
 2. Terminate the bare CANBUS (yellow and blue) wires of the motors to the 2x1 header connectors
-3. Set the {MOTOR ID} + {CANBUS TERMINATION RESISTOR}
+3. Remove the motor back covers and locate the `BRAKE-RES` pads; soldering lengths of silicone wire to them
+   ![Soldering Brake Leads](https://github.com/user-attachments/assets/b346bfd5-93a2-400f-adeb-af165df15806)
+5. Use a metal file to remove some of the rear cover material, allowing the wires you've soldered through
+   ![Modified Cover](https://github.com/user-attachments/assets/42279f81-b85d-4a73-8861-626f2d3d671a)
+6. Reattach the motor covers, being sure not to pinch the new wires
+   ![Reattached Cover](https://github.com/user-attachments/assets/c67a7f42-6b03-4f35-b11b-db235ba6a57d)
+7. Bolt the acrylic pulley parts onto the motor hubs, sandwiching the lengths of steel wire into the 'S' shaped recess
 
 ### Main Unit
 1. Glue the 'Front Panel' plates together
@@ -190,15 +198,18 @@ Any notable details are included below.
 4. Bolt the 'Pulley' parts and wires onto the motors (ensuring that one side if 'flipped' so the wire winds from the outside edge on both sides)
 5. Attach the motors (and attached pulleys) to the assembled 'Rear Panel' part using the 12mm M4 bolts
 6. Using the 40mm spacers and 12mm M4 bolts, attach the 'Front Panel' to the 'Rear Panel' (ensuring the previously attached wires exit between the appropriate spacers)
-7. {ATTACH COOLING PLATES}
-8. {ATTACH GRUBS + SPACERS}
-9. {ATTACH PROTOBOARD TRAY}
-10. {ATTACH PROTOBOARD}
+7. Attach the resistors to the cooling plates using the countersunk screws _or_ thermal adhesive
+   ![image](https://github.com/user-attachments/assets/39eae1f8-831f-4aee-8333-7afe27eb3378)
+9. Attach the cooling plates to the motors using the M4x20mm grubs, spacers and M4x16mm bolts
+   ![Grub Screw & Spacer](https://github.com/user-attachments/assets/fc0af8f1-f449-495e-a08f-32494312bba5)
+   ![Fitted Plates](https://github.com/user-attachments/assets/38b1229f-6ad7-4f11-90d1-b5f4ad3873da)
+10. Attach the protoboard tray to the spacers using the M4x12mm bolts, feeding the wires up from underneath
+    ![Fitted Tray](https://github.com/user-attachments/assets/20adceba-4a37-4b92-ac0b-1307ab532011)
 
 ### Belt Loops
 1. Pre-tap the 'Belt Loop' plate holes with M4 threads (you won't be able to do this once the plates are glued)
-2. Glue the 'Belt Loop' plates together
-3. Fit the M4 grub screws
+2. Glue the 'Belt Loop' plates together, such that the 'slotted' plaate is in the middle and the threaded plates are on the outside
+3. Fit the M4 grub screws into the threaded holes, leaving a gap for the wire
 4. Feed the steel wire into the hole and tighten the grub screws to retain the wire (use a looser fit when first testing your setup)
 
 ## Setup & Usage
