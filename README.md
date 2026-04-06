@@ -1,6 +1,6 @@
 # Active Belt Tensioner
 
-**UPDATE:** A new cost-optimised and much simpler version of this is on the way. I expect to be documenting it here in _March 2026_.
+**UPDATE:** A new cost-optimised and much simpler version of this is on the way. I expect to be documenting it here in _April 2026_.
 
 This is a dual-channel sim racing belt tensioner using BLDC integrated servo motors.
 
