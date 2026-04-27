@@ -1,6 +1,6 @@
-# Active Belt Tensioner
+> 📢 **Important:** A new cost-optimised and much simpler version of this [is now available](https://github.com/GeorgeWilkins/Simple-Active-Belt-Tensioner) and recommended for new users wishing to build a belt tensioner
 
-**UPDATE:** A new cost-optimised and much simpler version of this is on the way. I expect to be documenting it here in _April 2026_.
+# Active Belt Tensioner
 
 This is a dual-channel sim racing belt tensioner using BLDC integrated servo motors.
 
